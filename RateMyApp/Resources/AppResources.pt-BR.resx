@@ -174,4 +174,9 @@ Aviso: Esta comunicação por e-mail é regida pelos termos e condições de pri
   <data name="FeedbackSubject" xml:space="preserve">
     <value>{0}: Opinião dos clientes</value>
   </data>
+  <data name="RatingMessageR" xml:space="preserve">
+    <value>Você parece estar usando bastante o nosso aplicativo!
+
+Por que não avaliá-lo com 5 estrelas para mostrar o quanto você gosta dele?</value>
+  </data>
 </root>

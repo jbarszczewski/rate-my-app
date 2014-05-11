@@ -23,6 +23,7 @@ namespace RateMyApp.Helpers
         Active,
         FirstReview,
         SecondReview,
+        RecurrentReview,
         Feedback
     }
 
@@ -42,6 +43,7 @@ namespace RateMyApp.Helpers
         // Members
         private int firstCount;
         private int secondCount;
+        private int recurrentCount;
         private FeedbackState state;
         private int launchCount = 0;
         public event PropertyChangedEventHandler PropertyChanged;
@@ -106,6 +108,16 @@ namespace RateMyApp.Helpers
             {
                 secondCount = value;
                 OnPropertyChanged("SecondCount");
+            }
+        }
+
+        public int RecurrentCount
+        {
+            get { return recurrentCount; }
+            internal set
+            {
+                recurrentCount = value;
+                OnPropertyChanged("RecurrentCount");
             }
         }
 
@@ -191,6 +203,10 @@ namespace RateMyApp.Helpers
                     else if (LaunchCount == SecondCount)
                     {
                         State = FeedbackState.SecondReview;
+                    }
+                    else if (RecurrentCount != 0 && LaunchCount % RecurrentCount == 0)
+                    {
+                        State = FeedbackState.RecurrentReview;
                     }
 
                     StoreState();

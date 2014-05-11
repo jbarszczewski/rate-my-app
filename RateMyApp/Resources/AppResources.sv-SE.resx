@@ -174,4 +174,9 @@ Observera: Den här mejlutvecklingen innefattas av {5}’s användarvillkor och 
   <data name="FeedbackSubject" xml:space="preserve">
     <value>{0} Användarens feedback</value>
   </data>
+  <data name="RatingMessageR" xml:space="preserve">
+    <value>Det ser ut som att du har mycket nytta av vår app.
+
+Varför inte ge den en femma i betyg för att visa att du uppskattar den?</value>
+  </data>
 </root>

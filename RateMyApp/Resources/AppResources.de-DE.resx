@@ -174,4 +174,9 @@ Note: Diese E-Mail unterliegt den AGB und Datenschutzerklärung von {5}. Mehr In
   <data name="FeedbackSubject" xml:space="preserve">
     <value>{0} Feedback</value>
   </data>
+  <data name="RatingMessageR" xml:space="preserve">
+    <value>Wir freuen uns, dass Sie die Anwendung häufig nutzen!
+
+Geben Sie uns eine 5-Sterne-Bewertung?</value>
+  </data>
 </root>

@@ -164,6 +164,24 @@ namespace RateMyApp.Controls
 
         #endregion
 
+        // Use this from XAML to control rating message R
+        #region RatingMessageR Dependency Property
+
+        public static readonly DependencyProperty RatingMessageRProperty =
+            DependencyProperty.Register("RatingMessageR", typeof(string), typeof(FeedbackOverlay), new PropertyMetadata(AppResources.RatingMessageR, null));
+
+        public static void SetRatingMessageR(FeedbackOverlay element, string value)
+        {
+            element.SetValue(RatingMessageRProperty, value);
+        }
+
+        public static string GetRatingMessageR(FeedbackOverlay element)
+        {
+            return (string)element.GetValue(RatingMessageRProperty);
+        }
+
+        #endregion
+
         // Use this from XAML to control rating button yes 
         #region RatingYes Dependency Property
 
@@ -249,7 +267,7 @@ namespace RateMyApp.Controls
 
         public static readonly DependencyProperty FeedbackYesProperty =
             DependencyProperty.Register(
-                "FeedbackYes", typeof(string), typeof(FeedbackOverlay), 
+                "FeedbackYes", typeof(string), typeof(FeedbackOverlay),
                 new PropertyMetadata(AppResources.FeedbackYes, null));
 
         public static void SetFeedbackYes(FeedbackOverlay element, string value)
@@ -406,7 +424,7 @@ namespace RateMyApp.Controls
         #region SecondCount Dependency Property
 
         public static readonly DependencyProperty SecondCountProperty =
-            DependencyProperty.Register("SecondCount", typeof(int), typeof(FeedbackOverlay), new PropertyMetadata(10, null));
+            DependencyProperty.Register("SecondCount", typeof(int), typeof(FeedbackOverlay), new PropertyMetadata(0, null));
 
         public static void SetSecondCount(FeedbackOverlay element, int value)
         {
@@ -416,6 +434,24 @@ namespace RateMyApp.Controls
         public static int GetSecondCount(FeedbackOverlay element)
         {
             return (int)element.GetValue(SecondCountProperty);
+        }
+
+        #endregion
+        
+        // Use this from XAML to control recurrent count
+        #region RecurrentCount Dependency Property
+
+        public static readonly DependencyProperty RecurrentCountProperty =
+            DependencyProperty.Register("RecurrentCount", typeof(int), typeof(FeedbackOverlay), new PropertyMetadata(0, null));
+
+        public static void SetRecurrentCount(FeedbackOverlay element, int value)
+        {
+            element.SetValue(RecurrentCountProperty, value);
+        }
+
+        public static int GetRecurrentCount(FeedbackOverlay element)
+        {
+            return (int)element.GetValue(RecurrentCountProperty);
         }
 
         #endregion
@@ -545,13 +581,13 @@ namespace RateMyApp.Controls
             {
                 throw new ArgumentNullException("FeedbackTo", "Mandatory property not defined in FeedbackOverlay.");
             }
-			
+
             // ApplicationName property is mandatory and must be defined in xaml.
             if (GetApplicationName(this) == null || GetApplicationName(this).Length <= 0)
             {
                 throw new ArgumentNullException("ApplicationName", "Mandatory property not defined in FeedbackOverlay.");
             }
-			
+
             // CompanyName property is mandatory and must be defined in xaml.
             if (GetCompanyName(this) == null || GetCompanyName(this).Length <= 0)
             {
@@ -567,6 +603,7 @@ namespace RateMyApp.Controls
             // Set up FeedbackHelper with properties.
             RateMyApp.Helpers.FeedbackHelper.Default.FirstCount = FeedbackOverlay.GetFirstCount(this);
             RateMyApp.Helpers.FeedbackHelper.Default.SecondCount = FeedbackOverlay.GetSecondCount(this);
+            RateMyApp.Helpers.FeedbackHelper.Default.RecurrentCount = FeedbackOverlay.GetRecurrentCount(this);
             RateMyApp.Helpers.FeedbackHelper.Default.CountDays = FeedbackOverlay.GetCountDays(this);
 
             // Inform FeedbackHelper of the creation of this control.
@@ -596,6 +633,16 @@ namespace RateMyApp.Controls
             {
                 SetVisibility(true);
                 SetupSecondMessage();
+
+                if (FeedbackOverlay.GetEnableAnimation(this))
+                {
+                    showContent.Begin();
+                }
+            }
+            else if (FeedbackHelper.Default.State == FeedbackState.RecurrentReview)
+            {
+                SetVisibility(true);
+                SetupRecurrentMessage();
 
                 if (FeedbackOverlay.GetEnableAnimation(this))
                 {
@@ -655,6 +702,14 @@ namespace RateMyApp.Controls
         {
             Title = string.Format(FeedbackOverlay.GetRatingTitle(this), GetApplicationName());
             Message = FeedbackOverlay.GetRatingMessage2(this);
+            YesText = FeedbackOverlay.GetRatingYes(this);
+            NoText = FeedbackOverlay.GetRatingNo(this);
+        }
+
+        private void SetupRecurrentMessage()
+        {
+            Title = string.Format(FeedbackOverlay.GetRatingTitle(this), GetApplicationName());
+            Message = FeedbackOverlay.GetRatingMessageR(this);
             YesText = FeedbackOverlay.GetRatingYes(this);
             NoText = FeedbackOverlay.GetRatingNo(this);
         }
@@ -908,6 +963,7 @@ namespace RateMyApp.Controls
             SetFeedbackYes(this, AppResources.FeedbackYes);
             SetRatingMessage1(this, AppResources.RatingMessage1);
             SetRatingMessage2(this, AppResources.RatingMessage2);
+            SetRatingMessageR(this, AppResources.RatingMessageR);
             SetRatingNo(this, AppResources.RatingNo);
             SetRatingTitle(this, string.Format(AppResources.RatingTitle, GetApplicationName()));
             SetRatingYes(this, AppResources.RatingYes);

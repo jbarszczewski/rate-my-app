@@ -175,4 +175,9 @@ Nota: El intercambio de email queda sujeto a los terminos y condiciones de priva
   <data name="FeedbackSubject" xml:space="preserve">
     <value>{0} Opinión del usuario</value>
   </data>
+  <data name="RatingMessageR" xml:space="preserve">
+    <value>¡Parece que usas bastante nuestra aplicación!
+
+¿Por que no lo demuestras valorandonos con 5 estrellas?</value>
+  </data>
 </root>

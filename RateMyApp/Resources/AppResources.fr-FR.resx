@@ -172,4 +172,9 @@ Note: Cet échange d'e-mail est régi par les Conditions Générales et les Dire
   <data name="FeedbackSubject" xml:space="preserve">
     <value>{0} Commentaires</value>
   </data>
+  <data name="RatingMessageR" xml:space="preserve">
+    <value>Vous semblez souvent utiliser notre application !
+
+Pourquoi ne pas nous donner une note de 5 étoiles en signe d'appréciation ?</value>
+  </data>
 </root>

@@ -47,6 +47,7 @@
             <StackPanel Margin="0,12,0,0">
                 <TextBlock Text="{Binding FirstCount, StringFormat='First count: {0}'}" />
                 <TextBlock Text="{Binding SecondCount, StringFormat='Second count: {0}'}" />
+                <TextBlock Text="{Binding RecurrentCount, StringFormat='Recurrent count: {0}'}"/>
                 <TextBlock Text="{Binding State, StringFormat='Control state: {0}'}" />
                 <TextBlock Text="{Binding LaunchCount, StringFormat='Launch count: {0}'}" />
                 <TextBlock Text="{Binding IsReviewed, StringFormat='Is app reviewed: {0}'}" />
@@ -57,7 +58,7 @@
         <!-- Feedback overlay -->
 
         <ctrl:FeedbackOverlay x:Name="FeedbackOverlay"
-                              Grid.RowSpan="2"
+                              Grid.RowSpan="2" FirstCount="2" SecondCount="5" RecurrentCount="10"
                               FeedbackTo="{Binding Path=LocalizedResources.FeedbackTo, Source={StaticResource LocalizedStrings}}"
                               ApplicationName="{Binding Path=LocalizedResources.ApplicationName, Source={StaticResource LocalizedStrings}}"
                               CompanyName="{Binding Path=LocalizedResources.CompanyName, Source={StaticResource LocalizedStrings}}"/>
